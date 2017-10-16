@@ -10,6 +10,8 @@ class Topic extends Model
 
     protected $category_id;
 
+    protected $fillable = ['title', 'category_id'];
+
     public function messages()
     {
         return $this->hasMany('App\Message');

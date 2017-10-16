@@ -15,6 +15,7 @@ class CreateTopicTable extends Migration
     {
         Schema::create('topics', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
@@ -28,6 +29,6 @@ class CreateTopicTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('topic');
+        Schema::dropIfExists('topics');
     }
 }

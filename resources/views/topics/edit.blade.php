@@ -15,7 +15,7 @@
         @if (\Session::has('success'))
             <div class="alert alert-success">
                 <p>{{ \Session::get('success') }}</p>
-            </div><br />
+            </div><br/>
         @endif
         <form method="post" action="{{route('topic_update', ['id' => $id])}}">
             {{csrf_field()}}

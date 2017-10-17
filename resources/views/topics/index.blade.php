@@ -3,17 +3,18 @@
 @section('content')
     <div class="container">
         <a href="{{route('topic_create')}}" class="btn btn-primary">Create A Topic</a>
-        <br />
+        <br/>
         @if (\Session::has('success'))
             <div class="alert alert-success">
                 <p>{{ \Session::get('success') }}</p>
-            </div><br />
+            </div><br/>
         @endif
         <table class="table table-striped">
             <thead>
             <tr>
                 <th>ID</th>
                 <th>Title</th>
+                <th>Category</th>
                 <th colspan="2">Action</th>
                 <th>Messages</th>
             </tr>
@@ -23,6 +24,11 @@
                 <tr>
                     <td>{{$topic->id}}</td>
                     <td>{{$topic->title}}</td>
+                    <td>
+                        <a href="{{route('categories.index')}}">
+                            {{$topic->category->name}}
+                        </a>
+                    </td>
                     <td>
                         <a href="{{route('topic_update', [ 'id' => $topic->id])}}" class="btn btn-warning">Edit</a>
                     </td>

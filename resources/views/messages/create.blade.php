@@ -10,12 +10,12 @@
                         <li>{{ $error }}</li>
                     @endforeach
                 </ul>
-            </div><br />
+            </div><br/>
         @endif
         @if (\Session::has('success'))
             <div class="alert alert-success">
                 <p>{{ \Session::get('success') }}</p>
-            </div><br />
+            </div><br/>
         @endif
         <form action="#" method="post">
             {{csrf_field()}}

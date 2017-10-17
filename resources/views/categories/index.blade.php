@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
         <a href="{{route('categories.create')}}" class="btn btn-primary">Create A Category</a>
-        <br />
+        <br/>
         @if (\Session::has('success'))
             <div class="alert alert-success">
                 <p>{{ \Session::get('success') }}</p>
-            </div><br />
+            </div><br/>
         @endif
         <table class="table table-striped">
             <thead>
@@ -23,7 +23,8 @@
                 <tr>
                     <td>{{$category->id}}</td>
                     <td>{{$category->name}}</td>
-                    <td><a href="{{ route('categories.edit', ['id' => $category->id])}}" class="btn btn-warning">Edit</a></td>
+                    <td><a href="{{ route('categories.edit', ['id' => $category->id])}}"
+                           class="btn btn-warning">Edit</a></td>
                     <td>
                         <form action="{{route('categories.destroy', $category->id)}}" method="post">
                             {{csrf_field()}}
@@ -31,7 +32,9 @@
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
-                    <td><a href="{{ route('topic_list', ['category_id' => $category->id]) }}">{{ count($category->topics) }}</a></td>
+                    <td>
+                        <a href="{{ route('topic_list', ['category_id' => $category->id]) }}">{{ count($category->topics) }}</a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

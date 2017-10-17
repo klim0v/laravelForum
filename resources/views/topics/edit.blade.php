@@ -22,15 +22,15 @@
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="form-group col-md-4">
-                    <label for="name">Title:</label>
-                    <input type="text" class="form-control" name="title" value="{{$topic->title}}">
+                    <label for="title">Title:</label>
+                    <input id="title" type="text" class="form-control" name="title" value="{{$topic->title}}">
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="form-group col-md-4">
-                    <label for="name">Category:</label>
-                    <select name="category_id" >
+                    <label for="category_id">Category:</label>
+                    <select id="category_id" name="category_id" class="form-control">
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach

@@ -22,8 +22,13 @@ class MessageTest extends TestCase
 
         $latest_message = Message::latest()->first();
 
+        $this->assertNotNull($message->created_at);
         $this->assertEquals($message->topic_id, $latest_message->id);
         $this->assertEquals($message->text, $latest_message->text);
-//        $this->seeInDatabase('messages', ['id' => 1, 'text' => 'test text', 'topic_id' => 1]); // есть ли что то похожее в 5.5 ?
+        $this->assertDatabaseHas('messages', ['id' => 1, 'text' => 'test text', 'topic_id' => 1]);
+
+        // вынести в отдельный
+        $message2 = Message::create(['text' => 'test text 2', 'topic_id' => $topic->id]);
+        $this->assertCount(2, $topic->messages);
     }
 }

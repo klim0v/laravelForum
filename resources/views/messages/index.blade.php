@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a href="{{route('categories.create')}}" class="btn btn-primary">Create A Category</a>
+        <a href="{{route('message_create')}}" class="btn btn-primary">Create A Message</a>
         <br />
         @if (\Session::has('success'))
             <div class="alert alert-success">
@@ -13,25 +13,24 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Text</th>
                 <th colspan="2">Action</th>
-                <th>Topics</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($categories as $category)
+            @foreach($messages as $message)
                 <tr>
-                    <td>{{$category->id}}</td>
-                    <td>{{$category->name}}</td>
-                    <td><a href="{{ route('categories.edit', ['id' => $category->id])}}" class="btn btn-warning">Edit</a></td>
+                    <td>{{$message->id}}</td>
+                    <td>{{$message->text}}</td>
                     <td>
-                        <form action="{{route('categories.destroy', $category->id)}}" method="post">
+                        <a href="{{route('message_update', [ 'id' => $message->id])}}" class="btn btn-warning">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{route('message_delete', [ 'id' => $message->id])}}" method="post">
                             {{csrf_field()}}
-                            <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
-                    <td><a href="{{ route('topic_list', ['category_id' => $category->id]) }}">{{ count($category->topics) }}</a></td>
                 </tr>
             @endforeach
             </tbody>

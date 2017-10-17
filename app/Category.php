@@ -10,7 +10,7 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    public function messages()
+    public function topics()
     {
         return $this->hasMany('App\Topic');
     }

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <a href="{{route('categories.create')}}" class="btn btn-primary">Create A Category</a>
+        <a href="{{route('topic_create')}}" class="btn btn-primary">Create A Topic</a>
         <br />
         @if (\Session::has('success'))
             <div class="alert alert-success">
@@ -13,25 +13,30 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
+                <th>Title</th>
                 <th colspan="2">Action</th>
-                <th>Topics</th>
+                <th>Messages</th>
             </tr>
             </thead>
             <tbody>
-            @foreach($categories as $category)
+            @foreach($topics as $topic)
                 <tr>
-                    <td>{{$category->id}}</td>
-                    <td>{{$category->name}}</td>
-                    <td><a href="{{ route('categories.edit', ['id' => $category->id])}}" class="btn btn-warning">Edit</a></td>
+                    <td>{{$topic->id}}</td>
+                    <td>{{$topic->title}}</td>
                     <td>
-                        <form action="{{route('categories.destroy', $category->id)}}" method="post">
+                        <a href="{{route('topic_update', [ 'id' => $topic->id])}}" class="btn btn-warning">Edit</a>
+                    </td>
+                    <td>
+                        <form action="{{route('topic_delete', [ 'id' => $topic->id])}}" method="post">
                             {{csrf_field()}}
-                            <input name="_method" type="hidden" value="DELETE">
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
-                    <td><a href="{{ route('topic_list', ['category_id' => $category->id]) }}">{{ count($category->topics) }}</a></td>
+                    <td>
+                        <a href="{{ route('message_list', ['topic_id' => $topic->id]) }}">
+                            {{ count($topic->messages) }}
+                        </a>
+                    </td>
                 </tr>
             @endforeach
             </tbody>

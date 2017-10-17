@@ -14,7 +14,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all()->toArray();
+        $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
 
@@ -64,7 +64,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         return view('categories.edit',compact('category','id'));
     }
 
@@ -77,7 +77,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $this->validate(request(), [
             'name' => 'required',
         ]);
@@ -94,7 +94,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::find($id);
+        $category = Category::findOrFail($id);
         $category->delete();
         return redirect('categories')->with('success','Category has been  deleted');
     }

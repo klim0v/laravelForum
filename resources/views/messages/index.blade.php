@@ -18,7 +18,7 @@
                 <th>ID</th>
                 <th>Text</th>
                 <th>Topic</th>
-                <th colspan="2">Action</th>
+                <th colspan="3">Action</th>
             </tr>
             </thead>
             <tbody>
@@ -40,6 +40,7 @@
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
+                    <td></td>
                 </tr>
             @endforeach
             </tbody>

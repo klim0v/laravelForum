@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.index', compact('categories'));
+        return view('categories.index')->with('categories', $categories);
     }
 
     /**
@@ -36,11 +36,13 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = $this->validate(request(), [
+        $this->validate(request(), [
             'name' => 'required',
         ]);
 
-        Category::create($category);
+        $category       = new Category;
+        $category->name = $request->get('name');
+        $category->save();
 
         return back()->with('success', 'Category has been added');
     }
@@ -65,7 +67,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $category = Category::findOrFail($id);
-        return view('categories.edit',compact('category','id'));
+        return view('categories.edit')->with('category', $category);
     }
 
     /**
@@ -78,12 +80,14 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
-        $this->validate(request(), [
+        $this->validate($request, [
             'name' => 'required',
         ]);
         $category->name = $request->get('name');
         $category->save();
-        return redirect('categories')->with('success','Category has been updated');
+
+        return redirect()->route('categories.index')
+            ->with('success','Category has been updated');
     }
 
     /**
@@ -94,8 +98,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
-        return redirect('categories')->with('success','Category has been  deleted');
+        Category::findOrFail($id)->delete();
+        return redirect()->route('categories.index')->with('success','Category has been  deleted');
     }
 }

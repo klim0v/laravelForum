@@ -17,5 +17,4 @@ class Message extends Model
     {
         return $this->belongsTo('App\Topic');
     }
-
 }

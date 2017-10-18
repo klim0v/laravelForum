@@ -14,7 +14,12 @@
                 </ul>
             </div><br/>
         @endif
-        <form method="post" action="{{action('CategoryController@update', $id)}}">
+        @if (\Session::has('success'))
+            <div class="alert alert-success">
+                <p>{{ \Session::get('success') }}</p>
+            </div><br/>
+        @endif
+        <form method="post" action="{{route('categories.update',[ 'id' => $category->id])}}">
             {{csrf_field()}}
             <input name="_method" type="hidden" value="PATCH">
             <div class="row">

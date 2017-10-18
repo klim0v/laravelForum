@@ -10,29 +10,30 @@ class TopicController extends Controller
 {
     public function index(Request $request)
     {
-        $category = $request->input('category_id');
-        if (!empty($category)){
-            $topics = Topic::where(['category_id' => $category])->get();
-        } else {
-            $topics = Topic::all();
-        }
-        return view('topics.index', compact('topics'));
+        $topics = Topic::when($request->has('category_id'), function ($query) use ($request) {
+            $query->where('category_id', $request->category_id);
+        })->get();
+
+        return view('topics.index')->with('topics', $topics);
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('topics.create', compact('categories'));
+        return view('topics.create')->with('categories', $categories);
     }
 
     public function store(Request $request)
     {
-        $topic = $this->validate(request(), [
+        $this->validate(request(), [
             'title' => 'required',
             'category_id' => 'required|numeric',
         ]);
 
-        Topic::create($topic);
+        $message = new Topic;
+        $message->title = $request->get('title');
+        $message->category_id = $request->get('category_id');
+        $message->save();
 
         return back()->with('success', 'Topic has been added');
     }
@@ -41,7 +42,8 @@ class TopicController extends Controller
     {
         $categories = Category::all();
         $topic = Topic::findOrFail($id);
-        return view('topics.edit',compact('topic', 'categories', 'id'));
+        return view('topics.edit')->with('topic', $topic)
+            ->with('categories', $categories);
     }
 
     public function update(Request $request, $id)
@@ -59,8 +61,7 @@ class TopicController extends Controller
 
     public function destroy($id)
     {
-        $topic = Topic::findOrFail($id);
-        $topic->delete();
-        return redirect('topics')->with('success','Category has been  deleted');
+        $topic = Topic::findOrFail($id)->delete();
+        return redirect()-route('topic_list')->with('success','Category has been  deleted');
     }
 }

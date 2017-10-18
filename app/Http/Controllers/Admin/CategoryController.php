@@ -87,7 +87,7 @@ class CategoryController extends Controller
         $category->name = $request->get('name');
         $category->save();
 
-        return redirect()->route('categories.index')
+        return redirect()->route('admin.categories.index')
             ->with('success','Category has been updated');
     }
 
@@ -100,6 +100,7 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         Category::findOrFail($id)->delete();
-        return redirect()->route('categories.index')->with('success','Category has been  deleted');
+        return redirect()->route('admin.categories.index')
+            ->with('success','Category has been  deleted');
     }
 }

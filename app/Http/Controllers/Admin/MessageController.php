@@ -79,7 +79,7 @@ class MessageController extends Controller
         $message->topic_id = $request->get('topic_id');
         $message->save();
 
-        return redirect()->route('message_list')
+        return redirect()->route('admin.messages.index')
             ->with('success','Message has been updated');
     }
 
@@ -91,6 +91,6 @@ class MessageController extends Controller
     {
         $message = Message::findOrFail($id);
         $message->delete();
-        return redirect()->route('message_list')->with('success','Message has been  deleted');
+        return redirect()->route('admin.messages.index')->with('success','Message has been  deleted');
     }
 }

@@ -69,7 +69,7 @@
     @if (Route::has('login'))
         <div class="top-right links">
             @auth
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ route('admin') }}">Admin</a>
                 @else
                     <a href="{{ route('login') }}">Login</a>
                     <a href="{{ route('register') }}">Register</a>
@@ -78,14 +78,15 @@
     @endif
 
     <div class="content">
+
         <div class="title m-b-md">
             Laravel
         </div>
 
         <div class="links">
-            <a href="{{ route('categories.index') }}">Categories</a>
-            <a href="{{ route('topic_list') }}">Topics</a>
-            <a href="{{ route('message_list') }}">Messages</a>
+            {{--<a href="{{ route('admin.categories.index') }}">Categories</a>--}}
+            {{--<a href="{{ route('admin.topics.index') }}">Topics</a>--}}
+            {{--<a href="{{ route('admin_message_list') }}">Messages</a>--}}
         </div>
     </div>
 </div>

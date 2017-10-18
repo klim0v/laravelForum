@@ -23,24 +23,31 @@ Route::prefix('admin')->group(function () {
 
         Route::get('', 'Admin\HomeController@index')->name('admin');
 
-        Route::resource('categories', 'Admin\CategoryController');
+        Route::prefix('categories')->group(function () {
+            Route::get('', 'Admin\CategoryController@index')->name('admin.categories.index');
+            Route::get('create', 'Admin\CategoryController@create')->name('admin.categories.create');
+            Route::post('create', 'Admin\CategoryController@store')->name('admin.categories.store');
+            Route::get('{id}/edit', 'Admin\CategoryController@edit')->name('admin.categories.edit');
+            Route::post('{id}/edit', 'Admin\CategoryController@update')->name('admin.categories.update');
+            Route::post('{id}/del', 'Admin\CategoryController@destroy')->name('admin.categories.destroy');
+        });
 
         Route::prefix('topics')->group(function () {
-            Route::get('', 'Admin\TopicController@index')->name('topic_list');
-            Route::get('create', 'Admin\TopicController@create')->name('topic_create');
-            Route::post('create', 'Admin\TopicController@store')->name('topic_store');
-            Route::get('{id}/edit', 'Admin\TopicController@edit')->name('topic_edit');
-            Route::post('{id}/edit', 'Admin\TopicController@update')->name('topic_update');
-            Route::post('{id}/del', 'Admin\TopicController@destroy')->name('topic_delete');
+            Route::get('', 'Admin\TopicController@index')->name('admin.topics.index');
+            Route::get('create', 'Admin\TopicController@create')->name('admin.topics.create');
+            Route::post('create', 'Admin\TopicController@store')->name('admin.topics.store');
+            Route::get('{id}/edit', 'Admin\TopicController@edit')->name('admin.topics.edit');
+            Route::post('{id}/edit', 'Admin\TopicController@update')->name('admin.topics.update');
+            Route::post('{id}/del', 'Admin\TopicController@destroy')->name('admin.topics.destroy');
         });
 
         Route::prefix('messages')->group(function () {
-            Route::get('', 'Admin\MessageController@index')->name('message_list');
-            Route::get('create', 'Admin\MessageController@create')->name('message_create');
-            Route::post('create', 'Admin\MessageController@store')->name('message_store');
-            Route::get('{id}/edit', 'Admin\MessageController@edit')->name('message_edit');
-            Route::post('{id}/edit', 'Admin\MessageController@update')->name('message_update');
-            Route::post('{id}/del', 'Admin\MessageController@destroy')->name('message_delete');
+            Route::get('', 'Admin\MessageController@index')->name('admin.messages.index');
+            Route::get('create', 'Admin\MessageController@create')->name('admin.messages.create');
+            Route::post('create', 'Admin\MessageController@store')->name('admin.messages.store');
+            Route::get('{id}/edit', 'Admin\MessageController@edit')->name('admin.messages.edit');
+            Route::post('{id}/edit', 'Admin\MessageController@update')->name('admin.messages.update');
+            Route::post('{id}/del', 'Admin\MessageController@destroy')->name('admin.messages.destroy');
         });
 
     });

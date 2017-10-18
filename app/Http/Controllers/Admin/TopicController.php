@@ -57,12 +57,12 @@ class TopicController extends Controller
         $topic->title = $request->get('title');
         $topic->category_id = $request->get('category_id');
         $topic->save();
-        return redirect()->route('topic_list')->with('success','Topic has been updated');
+        return redirect()->route('admin.topics.index')->with('success','Topic has been updated');
     }
 
     public function destroy($id)
     {
         Topic::findOrFail($id)->delete();
-        return redirect()->route('topic_list')->with('success','Category has been  deleted');
+        return redirect()->route('admin.topics.index')->with('success','Category has been  deleted');
     }
 }

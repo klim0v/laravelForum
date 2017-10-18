@@ -15,7 +15,12 @@
                         @endif
 
                         You are logged in!
+
                     </div>
+
+                    <a href="{{ route('admin.categories.index') }}">Categories</a>
+                    <a href="{{ route('admin.topics.index') }}">Topics</a>
+                    <a href="{{ route('admin.messages.index') }}">Messages</a>
 
                 </div>
             </div>

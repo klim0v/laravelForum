@@ -19,9 +19,8 @@
                 <p>{{ \Session::get('success') }}</p>
             </div><br/>
         @endif
-        <form method="post" action="{{route('categories.update',[ 'id' => $category->id])}}">
+        <form method="post" action="{{ route('admin.categories.update', [ 'id' => $category->id ]) }}">
             {{csrf_field()}}
-            <input name="_method" type="hidden" value="PATCH">
             <div class="row">
                 <div class="col-md-4"></div>
                 <div class="form-group col-md-4">

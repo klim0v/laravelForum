@@ -5,8 +5,7 @@
 @section('content')
     <div class="container">
         <h1>All Topics</h1>
-
-        <a href="{{route('topic_create')}}" class="btn btn-primary">Create A Topic</a>
+        <a href="{{route('admin.topics.create')}}" class="btn btn-primary">Create A Topic</a>
         <br/>
         @if (\Session::has('success'))
             <div class="alert alert-success">
@@ -29,21 +28,21 @@
                     <td>{{$topic->id}}</td>
                     <td>{{$topic->title}}</td>
                     <td>
-                        <a href="{{route('categories.index')}}">
+                        <a href="{{route('admin.categories.index')}}">
                             {{$topic->category->name}}
                         </a>
                     </td>
                     <td>
-                        <a href="{{route('topic_update', [ 'id' => $topic->id])}}" class="btn btn-warning">Edit</a>
+                        <a href="{{route('admin.topics.update', [ 'id' => $topic->id])}}" class="btn btn-warning">Edit</a>
                     </td>
                     <td>
-                        <form action="{{route('topic_delete', [ 'id' => $topic->id])}}" method="post">
+                        <form action="{{route('admin.topics.destroy', [ 'id' => $topic->id])}}" method="post">
                             {{csrf_field()}}
                             <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
                     <td>
-                        <a href="{{ route('message_list', ['topic_id' => $topic->id]) }}">
+                        <a href="{{ route('admin.messages.index', ['topic_id' => $topic->id]) }}">
                             {{ count($topic->messages) }}
                         </a>
                     </td>

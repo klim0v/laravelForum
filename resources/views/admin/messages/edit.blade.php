@@ -19,7 +19,7 @@
                 <p>{{ \Session::get('success') }}</p>
             </div><br/>
         @endif
-        <form method="post" action="{{route('message_update', ['id' => $message->id])}}">
+        <form method="post" action="{{route('admin.messages.update', ['id' => $message->id])}}">
             {{csrf_field()}}
             <div class="row">
                 <div class="col-md-4"></div>

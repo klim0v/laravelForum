@@ -33,7 +33,8 @@
                         </a>
                     </td>
                     <td>
-                        <a href="{{route('admin.topics.update', [ 'id' => $topic->id])}}" class="btn btn-warning">Edit</a>
+                        <a href="{{route('admin.topics.update', [ 'id' => $topic->id])}}"
+                           class="btn btn-warning">Edit</a>
                     </td>
                     <td>
                         <form action="{{route('admin.topics.destroy', [ 'id' => $topic->id])}}" method="post">

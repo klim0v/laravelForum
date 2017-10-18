@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
+@section('title', 'Edit A Topic')
+
 @section('content')
     <div class="container">
+        <h1>All Topics</h1>
+
         <a href="{{route('topic_create')}}" class="btn btn-primary">Create A Topic</a>
         <br/>
         @if (\Session::has('success'))

@@ -1,8 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'Edit A Topic')
+
 @section('content')
     <div class="container">
-        <h2>Edit A Topic</h2><br/>
+        <h1>Edit A Topic</h1><br/>
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>

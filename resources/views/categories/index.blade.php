@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'All Categories')
+
 @section('content')
     <div class="container">
+        <h1>All Category</h1><br/>
         <a href="{{route('categories.create')}}" class="btn btn-primary">Create A Category</a>
         <br/>
         @if (\Session::has('success'))

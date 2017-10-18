@@ -1,7 +1,10 @@
 @extends('layouts.app')
 
+@section('title', 'All Messages')
+
 @section('content')
     <div class="container">
+        <h1>All Messages</h1>
         <a href="{{route('message_create')}}" class="btn btn-primary">Create A Message</a>
         <br/>
         @if (\Session::has('success'))

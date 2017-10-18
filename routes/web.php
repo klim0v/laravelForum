@@ -17,24 +17,32 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::prefix('admin')->group(function () {
 
-Route::resource('categories','CategoryController');
+    Route::middleware('auth')->group(function () {
 
-Route::prefix('topics')->group(function () {
-    Route::get('', 'TopicController@index')->name('topic_list');
-    Route::get('create', 'TopicController@create')->name('topic_create');
-    Route::post('create', 'TopicController@store')->name('topic_store');
-    Route::get('{id}/edit', 'TopicController@edit')->name('topic_edit');
-    Route::post('{id}/edit', 'TopicController@update')->name('topic_update');
-    Route::post('{id}/del', 'TopicController@destroy')->name('topic_delete');
-});
+        Route::get('', 'Admin\HomeController@index')->name('admin');
 
-Route::prefix('messages')->group(function () {
-    Route::get('', 'MessageController@index')->name('message_list');
-    Route::get('create', 'MessageController@create')->name('message_create');
-    Route::post('create', 'MessageController@store')->name('message_store');
-    Route::get('{id}/edit', 'MessageController@edit')->name('message_edit');
-    Route::post('{id}/edit', 'MessageController@update')->name('message_update');
-    Route::post('{id}/del', 'MessageController@destroy')->name('message_delete');
+        Route::resource('categories', 'Admin\CategoryController');
+
+        Route::prefix('topics')->group(function () {
+            Route::get('', 'Admin\TopicController@index')->name('topic_list');
+            Route::get('create', 'Admin\TopicController@create')->name('topic_create');
+            Route::post('create', 'Admin\TopicController@store')->name('topic_store');
+            Route::get('{id}/edit', 'Admin\TopicController@edit')->name('topic_edit');
+            Route::post('{id}/edit', 'Admin\TopicController@update')->name('topic_update');
+            Route::post('{id}/del', 'Admin\TopicController@destroy')->name('topic_delete');
+        });
+
+        Route::prefix('messages')->group(function () {
+            Route::get('', 'Admin\MessageController@index')->name('message_list');
+            Route::get('create', 'Admin\MessageController@create')->name('message_create');
+            Route::post('create', 'Admin\MessageController@store')->name('message_store');
+            Route::get('{id}/edit', 'Admin\MessageController@edit')->name('message_edit');
+            Route::post('{id}/edit', 'Admin\MessageController@update')->name('message_update');
+            Route::post('{id}/del', 'Admin\MessageController@destroy')->name('message_delete');
+        });
+
+    });
+
 });

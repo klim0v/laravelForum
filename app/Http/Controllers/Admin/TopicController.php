@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Category;
+use App\Http\Controllers\Controller;
 use App\Topic;
 use Illuminate\Http\Request;
 
@@ -14,13 +15,13 @@ class TopicController extends Controller
             $query->where('category_id', $request->category_id);
         })->get();
 
-        return view('topics.index')->with('topics', $topics);
+        return view('admin.topics.index')->with('topics', $topics);
     }
 
     public function create()
     {
         $categories = Category::all();
-        return view('topics.create')->with('categories', $categories);
+        return view('admin.topics.create')->with('categories', $categories);
     }
 
     public function store(Request $request)
@@ -42,7 +43,7 @@ class TopicController extends Controller
     {
         $categories = Category::all();
         $topic = Topic::findOrFail($id);
-        return view('topics.edit')->with('topic', $topic)
+        return view('admin.topics.edit')->with('topic', $topic)
             ->with('categories', $categories);
     }
 
@@ -56,12 +57,12 @@ class TopicController extends Controller
         $topic->title = $request->get('title');
         $topic->category_id = $request->get('category_id');
         $topic->save();
-        return redirect('topics')->with('success','Topic has been updated');
+        return redirect()->route('topic_list')->with('success','Topic has been updated');
     }
 
     public function destroy($id)
     {
-        $topic = Topic::findOrFail($id)->delete();
-        return redirect()-route('topic_list')->with('success','Category has been  deleted');
+        Topic::findOrFail($id)->delete();
+        return redirect()->route('topic_list')->with('success','Category has been  deleted');
     }
 }

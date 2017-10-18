@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Message;
 use App\Topic;
 use Illuminate\Http\Request;
@@ -18,7 +19,7 @@ class MessageController extends Controller
             $query->where('topic_id', $request->get('topic_id'));
         })->get();
 
-        return view('messages.index', compact('messages'));
+        return view('admin.messages.index', compact('messages'));
     }
 
     /**
@@ -27,7 +28,7 @@ class MessageController extends Controller
     public function create()
     {
         $topics = Topic::all();
-        return view('messages.create')->with('topics', $topics);
+        return view('admin.messages.create')->with('topics', $topics);
     }
 
     /**
@@ -57,7 +58,7 @@ class MessageController extends Controller
     {
         $message = Message::findOrFail($id);
         $topics = Topic::all();
-        return view('messages.edit')
+        return view('admin.messages.edit')
             ->with('message', $message)
             ->with('topics', $topics);
     }

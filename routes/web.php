@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'PublicController@index')->name('public.index');
+Route::post('/', 'PublicController@store')->name('public.messages.store');
 
 Auth::routes();
 
